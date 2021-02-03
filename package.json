@@ -4,7 +4,7 @@
   "description": "Handle and manages requests from GUI, web, app and extension including data store, database and manipulation.",
   "main": "main.js",
   "scripts": {
-    "start": "node -r dotenv/config dist/main.js",
+    "start": "node -r dotenv/config dist/src/main.js",
     "start:dev": "ts-node-dev -r dotenv/config --respawn -- src/main.ts",
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
