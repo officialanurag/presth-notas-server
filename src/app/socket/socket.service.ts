@@ -5,6 +5,7 @@ import { BadRequest, NotFound } from './../../../lib/errors';
 export class SocketService {
     public webSocketPort: number;
     private connectionPool: {[key: string]: WS} = {};
+    private logging: boolean = false;
 
     constructor(port: number, channels: IChannel) {
         this.webSocketPort = port;
@@ -57,7 +58,10 @@ export class SocketService {
         const _wss: any = new WS.Server({ port: this.webSocketPort });        
         _wss.on('connection', (_ws: any) => {
             _ws.on('message', (data: any) => {
-                console.time('request')
+                if (this.logging)  {
+                    console.time('request')
+                }
+                    
                 const _request: IRequest = this.validateRequest(data);                
                 if (_request.channel === 'Error') {
                     _ws.send(JSON.stringify({
@@ -87,7 +91,9 @@ export class SocketService {
                     ).then(
                         (data: any) => {                            
                             _ws.send(JSON.stringify(data))
-                            console.timeEnd('request')
+                            if (this.logging) {
+                                console.timeEnd('request')
+                            }
                         }
                     );
                 } else {
