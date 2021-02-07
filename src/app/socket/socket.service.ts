@@ -1,6 +1,8 @@
 import * as WS from 'ws';
 import { IChannel, IChannelType, IRequest, IResponse } from './../main.interface';
 import { BadRequest, NotFound } from './../../../lib/errors';
+import { readFileSync } from 'fs';
+import { createServer, Server } from 'https';
 
 export class SocketService {
     public webSocketPort: number;
@@ -54,8 +56,19 @@ export class SocketService {
     }
 
     private initiateWebSockets(channels: IChannel) {
-        const _associativeChannelAccess = this.createChannelsObject(channels);        
-        const _wss: any = new WS.Server({ port: this.webSocketPort });        
+        let _wss: any;
+        let _server: Server;
+        if (process.env.PLATFORM_ENV !== 'dev') {
+            _server = createServer({
+                cert: readFileSync('/etc/letsencrypt/live/pickiser.com/fullchain.pem'),
+                key: readFileSync('/etc/letsencrypt/live/pickiser.com/privkey.pem')
+            });
+            _wss = new WS.Server({ _server });
+        } else {
+            _wss = new WS.Server({ port: this.webSocketPort });
+        }
+        
+        const _associativeChannelAccess = this.createChannelsObject(channels);
         _wss.on('connection', (_ws: any) => {
             _ws.on('message', (data: any) => {
                 if (this.logging)  {
@@ -104,5 +117,9 @@ export class SocketService {
                 }                
             })
         });
+
+        if (process.env.PLATFORM_ENV === 'prod') {
+            _server.listen(this.webSocketPort);
+        }
     }
 }
