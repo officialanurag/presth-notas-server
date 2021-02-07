@@ -63,7 +63,7 @@ export class SocketService {
                 cert: readFileSync('/etc/letsencrypt/live/pickiser.com/fullchain.pem'),
                 key: readFileSync('/etc/letsencrypt/live/pickiser.com/privkey.pem')
             });
-            _wss = new WS.Server({ _server });
+            _wss = new WS.Server({ server: _server });
         } else {
             _wss = new WS.Server({ port: this.webSocketPort });
         }
