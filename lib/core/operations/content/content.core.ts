@@ -16,12 +16,21 @@ export class ContentCore {
     }
 
     public async fetchContent(payload: IContentRequest) {
-        const fetchContentResponse: NotasContent = await this.contentRepository.getText(payload.userId); 
-        return this.translator(fetchContentResponse);
+        const fetchContentResponse: NotasContent = await this.contentRepository.getText(payload.userId, payload.pageId); 
+        if (fetchContentResponse) {
+            return this.translator(fetchContentResponse);
+        } else {
+            return {
+                userId: payload.userId,
+                text: '',
+                modifiedOn: null
+            };
+        }
     }
 
     public async writeContent(payload: IContentStoreRequest) {
-        const writeContentResponse: NotasContent = await this.contentRepository.writeText(payload.userId, payload.text);
+        const writeContentResponse: NotasContent = await this.contentRepository.writeText(payload.userId, payload.pageId, payload.text);
+        console.log(writeContentResponse)
         return this.translator(writeContentResponse);
     }
 

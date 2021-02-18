@@ -1,9 +1,14 @@
 /**
- * User Schemas
+ * User Schema
  */
 export * from './user.schema';
 
 /**
- * Content Schemas
+ * Content Schema
  */
 export * from './content.schema';
+
+/**
+ * Page Schema
+ */
+export * from './page.schema';

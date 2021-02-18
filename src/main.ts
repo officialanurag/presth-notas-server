@@ -1,6 +1,7 @@
 import { AppMain } from './app';
 import { EventEmitter } from 'events';
 import { ContentChannel } from './channels/content';
+import { PageChannel } from './channels/page';
 
 global['EVENT_EMITTER'] = new EventEmitter();;
 
@@ -14,7 +15,8 @@ const application = new AppMain({
     useRedis: false,
     middlewares: [],
     channels: [
-        ContentChannel
+        ContentChannel,
+        PageChannel
     ]
 });
 

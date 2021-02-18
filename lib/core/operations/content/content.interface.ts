@@ -1,5 +1,6 @@
 export interface IContentRequest {
     userId: string;
+    pageId: string;
 }
 
 export interface IContentStoreRequest extends IContentRequest {

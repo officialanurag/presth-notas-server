@@ -7,7 +7,7 @@ import { createServer, Server } from 'https';
 export class SocketService {
     public webSocketPort: number;
     private connectionPool: {[key: string]: WS} = {};
-    private logging: boolean = false;
+    private logging: boolean = true;
 
     constructor(port: number, channels: IChannel) {
         this.webSocketPort = port;
