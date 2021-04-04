@@ -2,6 +2,7 @@ import { AppMain } from './app';
 import { EventEmitter } from 'events';
 import { ContentChannel } from './channels/content';
 import { PageChannel } from './channels/page';
+import { ClientChannel } from './channels/clients';
 
 global['EVENT_EMITTER'] = new EventEmitter();;
 
@@ -16,7 +17,8 @@ const application = new AppMain({
     middlewares: [],
     channels: [
         ContentChannel,
-        PageChannel
+        PageChannel,
+        ClientChannel
     ]
 });
 

@@ -1,7 +1,7 @@
 import { Content, Page } from './schemas';
 import { NotasContent } from './model';
 import { TakeCare } from '../helpers';
-import mongoose, { Types } from 'mongoose';
+import mongoose from 'mongoose';
 
 export class ContentRepository {
     public static instance: ContentRepository;

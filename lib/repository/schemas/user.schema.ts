@@ -2,20 +2,17 @@ import mongoose, { Schema } from 'mongoose';
 import { AddressSchema } from './address.schema';
 
 const UserSchema: Schema = new Schema({
-    companyName: {
+    name: {
         type: String
     },
-    spocs: { 
+    email: { 
         type: String 
     },
-    contact: { 
+    password: { 
         type: String 
     },
-    address: { 
-        type: AddressSchema,        
-    },
-    other: {
-        type: String
+    areTermsAndConditionsAccepted: {
+        type: Boolean
     },
     createdOn: { 
         type: Date, 

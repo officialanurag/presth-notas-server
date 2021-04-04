@@ -1,18 +1,29 @@
 import { IAddress } from '../../core/operations/common/interface'
 
-export interface User {   
-    companyName: string;
-    spocs: string;
-    contact: string;
-    address: IAddress;
-    other: any;
+export interface AddUser {
+    name: string;
+    email: string;
+    password: string;
+    areTermsAndConditionsAccepted: boolean;
 }
 
-export interface AddUser extends User {}
+export interface UserResponse {
+    status: boolean;
+    message?: string;
+    userId?: string;
+    name?: string;
+}
 
-export interface UserResponse extends User {
-    _id: string,
-    createdOn: Date,
-    deletedOn: Date,
-    modifiedOn: Date
+export interface GetUser  {
+    email?: string,
+    password?: string
+}
+
+export interface User {
+    _id: string;
+    name: string;
+    email: string;
+    password: string;
+    createdOn: Date;
+    modifiedOn: Date;
 }
